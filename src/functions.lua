@@ -24,7 +24,11 @@ end
 
 -- Truncates a string and appends ellipsis to end
 function truncate(inputString, limit)
-	return string.sub(inputString, 1, (limit - 3)) .. "..."
+	if (#inputString < limit) then
+		return inputString
+	else
+		return string.sub(inputString, 1, (limit - 3)) .. "..."
+	end
 end
 
 function buildString(...)
