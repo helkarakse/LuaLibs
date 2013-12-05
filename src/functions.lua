@@ -22,6 +22,11 @@ function explode(divider, inputString)
     return array
 end
 
+-- Truncates a string and appends ellipsis to end
+function truncate(inputString, limit)
+	return string.sub(inputString, 1, (limit - 3)) .. "..."
+end
+
 function buildString(...)
 	local tempString = ""
 	for i,v in ipairs(arg) do
@@ -105,7 +110,7 @@ function readLookup(name)
 	return outputTable
 end
 
-function tablePrint (inputTable, indent, done)
+function tablePrint(inputTable, indent, done)
 	done = done or {}
 	indent = indent or 0
   	if type(inputTable) == "table" then
