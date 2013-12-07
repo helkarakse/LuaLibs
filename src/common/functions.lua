@@ -128,9 +128,9 @@ function tablePrint(inputTable, indent, done)
 				table.insert(stringBuilt, string.rep (" ", indent))
 				table.insert(stringBuilt, "}\n");
 			elseif "number" == type(key) then
-				table.insert(stringBuilt, string.format("\"%s\"\n", tostring(value)))
+				table.insert(stringBuilt, string.format("\"%outputString\"\n", tostring(value)))
 			else
-				table.insert(stringBuilt, string.format("%s = \"%s\"\n", tostring (key), tostring(value)))
+				table.insert(stringBuilt, string.format("%outputString = \"%outputString\"\n", tostring (key), tostring(value)))
 			end
 		end
 		return table.concat(stringBuilt)
@@ -164,4 +164,21 @@ end
 
 function roundTo(number, decimal)
 	return tonumber(string.format("%." .. (decimal or 0) .. "f", tonumber(number)))
+end
+
+-- Convert decimal number to hexadecimal
+function decToHex(inputDec)
+	local hexString = '0123456789abcdef'
+	local outputString = ''
+	
+	while inputDec > 0 do
+		local mod = math.fmod(inputDec, 16)
+		outputString = string.sub(hexString, mod+1, mod+1) .. outputString
+		inputDec = math.floor(inputDec / 16)
+	end
+	
+	if (outputString == '') then 
+		outputString = '0'
+	end
+	return outputString
 end
