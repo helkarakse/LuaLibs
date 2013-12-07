@@ -168,7 +168,7 @@ end
 
 -- Convert decimal number to hexadecimal
 function decToHex(inputDec)
-	local hexString = '0123456789abcdef'
+	local hexString = '0123456789ABCDEF'
 	local outputString = ''
 	
 	while inputDec > 0 do
