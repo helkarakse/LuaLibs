@@ -86,14 +86,14 @@ end
 function readTable(name)
 	debug("Checking if table exists...")
 	if (fs.exists(name) ~= true) then
-		return nil
+		return false, {}
 	end
 
 	debug("Table found, reading it now.")
 	local file = fs.open(name,"r")
 	local data = file.readAll()
 	file.close()
-	return textutils.unserialize(data)
+	return true, textutils.unserialize(data)
 end
 
 function readLookup(name)
