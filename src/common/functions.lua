@@ -192,6 +192,5 @@ function decToHex(inputDec)
 end
 
 function stripCData(inputString)
-	local currentString = string.gsub(inputString, "\<\!\[CDATA\[", "")
-	return string.gsub(currentString, "\]\]\>", "")
+	return string.gsub(inputString, '^<!%[CDATA%[(.-)%]%]>', "%1")
 end
