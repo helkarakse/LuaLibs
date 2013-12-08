@@ -139,6 +139,14 @@ function tablePrint(inputTable, indent, done)
 	end
 end
 
+function getTableCount(table)
+	local count = 0
+	for key, value in pairs(table) do
+		count = count + 1
+	end
+	return count
+end
+
 -- Miscellaneous
 function runFuncFor(func,timeout,tArgs, eventType)
 	local result = nil
