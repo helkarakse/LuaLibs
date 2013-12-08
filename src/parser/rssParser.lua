@@ -59,7 +59,7 @@ end
 
 -- Returns the title, link, description, date and guid for the item
 function parseItem(item)
-	return item[1][1], item[2][1], item[3][1], item[4][1], item[5][1]
+	return functions.stripCData(item[1][1]), item[2][1], item[3][1], item[4][1], item[5][1]
 end
 
 -- Converts the date from RFC 822 to a shorter version
