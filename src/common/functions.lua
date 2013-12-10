@@ -174,6 +174,21 @@ function roundTo(number, decimal)
 	return tonumber(string.format("%." .. (decimal or 0) .. "f", tonumber(number)))
 end
 
+function switch(table)
+	table.case = function (self, param)
+		local func = self[param] or self.default
+		if (func) then
+			if type(func) == "function" then
+				func(param, self)
+			else
+				error("Case " .. tostring(param) .. " is not a function")
+			end
+		end
+	end
+	
+	return table
+end
+
 -- Convert decimal number to hexadecimal
 function decToHex(inputDec)
 	local hexString = '0123456789ABCDEF'
