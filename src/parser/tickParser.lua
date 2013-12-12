@@ -144,7 +144,7 @@ function getChunks()
 		row.percent = value["%"]
 		row.time = value["Time/Tick"]
 		
-		local chunkTable = functions.explode("\, ", value[3])
+		local chunkTable = functions.explode("\, ", value["Chunk"])
 		local chunkX = tonumber(chunkTable[1])
 		local chunkZ = tonumber(chunkTable[2])
 		
