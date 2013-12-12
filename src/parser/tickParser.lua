@@ -100,8 +100,8 @@ function getSingleEntities()
 	
 	for key, value in pairs(tableSingleEntity) do
 		local row = {}
-		row.percent = value[1]
-		row.time = value[2]
+		row.percent = value["%"]
+		row.time = value["Time/Tick"]
 		
 		local nameTable = functions.explode(" ", value["Single Entity"])
 		-- the first part of the name contains the actual entity name
