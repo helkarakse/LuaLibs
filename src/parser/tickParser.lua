@@ -23,8 +23,13 @@
 os.loadAPI("json")
 os.loadAPI("functions")
 
--- Vars
+-- Variables
 local stringData, tableData, tableTps, tableSingleEntity, tableChunk, tableEntityByType, tableAverageCalls, tableUpdated
+
+-- References
+local tonumber = tonumber
+local tostring = tostring
+local colors = colors
 
 -- Dimension names
 local dimArray = {
