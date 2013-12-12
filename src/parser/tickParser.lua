@@ -100,8 +100,8 @@ function getSingleEntities()
 	
 	for key, value in pairs(tableSingleEntity) do
 		local row = {}
-		row.percent = value["%"]
-		row.time = value["Time\\/Tick"]
+		row.percent = value[1]
+		row.time = value[2]
 		
 		local nameTable = functions.explode(" ", value["Single Entity"])
 		-- the first part of the name contains the actual entity name
@@ -141,10 +141,10 @@ function getChunks()
 	
 	for key, value in pairs(tableChunk) do
 		local row = {}
-		row.percent = value["%"]
-		row.time = value["Time\\/Tick"]
+		row.percent = value[1]
+		row.time = value[2]
 		
-		local chunkTable = functions.explode("\, ", value["Chunk"])
+		local chunkTable = functions.explode("\, ", value[3])
 		local chunkX = tonumber(chunkTable[1])
 		local chunkZ = tonumber(chunkTable[2])
 		
@@ -169,9 +169,9 @@ function getEntityByTypes()
 	
 	for key, value in pairs(tableEntityByType) do
 		local row = {}
-		row.percent = value["%"]
-		row.time = value["Time\\/Tick"]
-		row.type = value["All Entities of Type"]
+		row.percent = value[1]
+		row.time = value[2]
+		row.type = value[3]
 		
 		table.insert(returnTable, row)
 	end
@@ -189,9 +189,9 @@ function getAverageCalls()
 	
 	for key, value in pairs(tableAverageCalls) do
 		local row = {}
-		row.time = value["Time\\/tick"]
-		row.name = value["Average Entity of Type"]
-		row.calls = value["Calls"]
+		row.time = value[1]
+		row.name = value[2]
+		row.calls = value[3]
 		
 		table.insert(returnTable, row)
 	end
