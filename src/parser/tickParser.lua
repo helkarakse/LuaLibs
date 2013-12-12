@@ -60,7 +60,10 @@ function parseData(stringInput)
 		tableAverageCalls = tableData[5]
 		tableUpdated = tableData[6]
 		for k, v in pairs(tableData) do
-		print(v)
+		for k2, v2 in pairs(v) do
+		print(k2)
+		print(v2)
+		end
 		end
 		return true
 	end
