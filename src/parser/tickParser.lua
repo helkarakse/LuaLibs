@@ -59,7 +59,7 @@ function parseData(stringInput)
 		tableEntityByType = tableData[4]
 		tableAverageCalls = tableData[5]
 		tableUpdated = tableData[6]
-		functions.debug(textutils.tabulate(tableUpdated))
+		functions.debug(textutils.tabulate(tableData))
 		return true
 	end
 end
