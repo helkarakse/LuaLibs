@@ -88,7 +88,12 @@ end
 -- Fixed, but not accurately rounding the number (using strsub method)
 function getTps()
 	-- return roundTo(getExactTps(), (places or 2))
-	return string.sub(getExactTps(), 1, 5)
+	local tps = string.sub(getExactTps(), 1, 5)
+	if (tonumber(tps) > 20) then
+		return "20.00"
+	else
+		return tps
+	end
 end
 
 -- SingleEntities
