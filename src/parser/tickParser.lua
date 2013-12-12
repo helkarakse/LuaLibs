@@ -59,14 +59,18 @@ function parseData(stringInput)
 		tableEntityByType = tableData[4]
 		tableAverageCalls = tableData[5]
 		tableUpdated = tableData[6]
-		for k, v in pairs(tableData) do
-		for k2, v2 in pairs(v) do
-		print(k2)
-		print(v2)
-		end
-		end
 		return true
 	end
+end
+
+-- Last Updated
+function getUpdatedDate()
+	local updatedValue = ""
+	for k, v in pairs(tableUpdated) do
+		updatedValue = v
+	end
+	
+	return updatedValue
 end
 
 -- TPS
