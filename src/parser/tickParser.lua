@@ -59,7 +59,9 @@ function parseData(stringInput)
 		tableEntityByType = tableData[4]
 		tableAverageCalls = tableData[5]
 		tableUpdated = tableData[6]
-		functions.debug(textutils.tabulate(tableData))
+		for k, v in pairs(tableData) do
+		print(v)
+		end
 		return true
 	end
 end
