@@ -141,8 +141,8 @@ function getChunks()
 	
 	for key, value in pairs(tableChunk) do
 		local row = {}
-		row.percent = value[1]
-		row.time = value[2]
+		row.percent = value["%"]
+		row.time = value["Time/Tick"]
 		
 		local chunkTable = functions.explode("\, ", value[3])
 		local chunkX = tonumber(chunkTable[1])
@@ -169,9 +169,9 @@ function getEntityByTypes()
 	
 	for key, value in pairs(tableEntityByType) do
 		local row = {}
-		row.percent = value[1]
-		row.time = value[2]
-		row.type = value[3]
+		row.percent = value["%"]
+		row.time = value["Time/Tick"]
+		row.type = value["All Entities of Type"]
 		
 		table.insert(returnTable, row)
 	end
@@ -189,9 +189,9 @@ function getAverageCalls()
 	
 	for key, value in pairs(tableAverageCalls) do
 		local row = {}
-		row.time = value[1]
-		row.name = value[2]
-		row.calls = value[3]
+		row.time = value["Time/tick"]
+		row.name = value["Average Entity of Type"]
+		row.calls = value["Calls"]
 		
 		table.insert(returnTable, row)
 	end
