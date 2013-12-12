@@ -24,7 +24,7 @@ os.loadAPI("json")
 os.loadAPI("functions")
 
 -- Vars
-local stringData, tableData, tableTps, tableSingleEntity, tableChunk, tableEntityByType, tableAverageCalls
+local stringData, tableData, tableTps, tableSingleEntity, tableChunk, tableEntityByType, tableAverageCalls, tableUpdated
 
 -- Dimension names
 local dimArray = {
@@ -58,6 +58,8 @@ function parseData(stringInput)
 		tableChunk = tableData[3]
 		tableEntityByType = tableData[4]
 		tableAverageCalls = tableData[5]
+		tableUpdated = tableData[6]
+		functions.debug(textutils.tabulate(tableUpdated))
 		return true
 	end
 end
