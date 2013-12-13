@@ -145,7 +145,7 @@ end
 -- Chunks
 -- Returns a table containing the chunks that cause lag.
 -- Each row is a table containing the following keys:
--- percent: percentage of time/tick, time: time/tick, positionX: X coordinate of chunk, positionZ: Z coordinate of chunk
+-- percent: percentage of time/tick, time: time/tick, positionX: X coordinate of chunk, positionZ: Z coordinate of chunk, dimension: dimension of chunk
 function getChunks()
 	local returnTable = {}
 	
@@ -154,18 +154,15 @@ function getChunks()
 		row.percent = value["%"]
 		row.time = value["Time/Tick"]
 		
-		local dimension, chunkX, chunkZ = string.match(value["Chunk"], "(%d)\: ([%d-])\, ([%d-])")
+		local dimension, chunkX, chunkZ = string.match(value["Chunk"], "(.*)\:\ (.*)\,\ (.*)")
 		functions.debug(dimension, " ", chunkX, " ", chunkZ)
-		
---		local chunkTable = functions.explode("\, ", value["Chunk"])
---		local chunkX = tonumber(chunkTable[1])
---		local chunkZ = tonumber(chunkTable[2])
 		
 		local realX = chunkX * 16
 		local realZ = chunkZ * 16
 		
 		row.positionX = realX
 		row.positionZ = realZ
+		row.dimension = dimension
 		
 		table.insert(returnTable, row)
 	end
