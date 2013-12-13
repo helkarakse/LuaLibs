@@ -154,7 +154,7 @@ function getChunks()
 		row.percent = value["%"]
 		row.time = value["Time/Tick"]
 		
-		local dimension, chunkX, chunkZ = string.match(value["Chunk"], "(%d)\: ([d%-])\, ([d%-])")
+		local dimension, chunkX, chunkZ = string.match(value["Chunk"], "(%d)\: ([%d-])\, ([%d-])")
 		functions.debug(dimension, " ", chunkX, " ", chunkZ)
 		
 --		local chunkTable = functions.explode("\, ", value["Chunk"])
