@@ -114,28 +114,8 @@ function getSingleEntities()
 		row.time = value["Time/Tick"]
 		
 		local name, posX, posY, posZ, dimension = string.match(value["Single Entity"], "(.*)\ (.*)\,(.*)\,(.*)\:(.*)")
-		
---		local nameTable = functions.explode(" ", value["Single Entity"])
-		-- the first part of the name contains the actual entity name
 		row.name = name
-		
---		local dimTable = functions.explode(":", value["Single Entity"])
 		row.dimId = dimension
-		
-		if (row.dimId == "1") then
-			row.dimension = "The End"
-		elseif (row.dimId == "0") then
-			row.dimension = "Overworld"
-		elseif (row.dimId == "-1") then
-			row.dimension = "Nether"
-		else
-			row.dimension = row.dimId
-		end
-		
-		-- strip off the dimension from the position
---		local position = nameTable[2]
---		local dimCharCount = string.len(row.dimId)
---		row.position = string.sub(position, 0, string.len(position) - (dimCharCount + 1))
 		row.position = posX .. ", " .. posY .. ", " .. posZ
 		
 		table.insert(returnTable, row)
