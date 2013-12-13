@@ -1,6 +1,6 @@
 --[[
 
-	TickProfiler JSON Data Parser Version 1.3 Alpha
+	TickProfiler JSON Data Parser
 	Do not modify, copy or distribute without permission of author
 	Helkarakse, 20131128
 	
@@ -154,9 +154,12 @@ function getChunks()
 		row.percent = value["%"]
 		row.time = value["Time/Tick"]
 		
-		local chunkTable = functions.explode("\, ", value["Chunk"])
-		local chunkX = tonumber(chunkTable[1])
-		local chunkZ = tonumber(chunkTable[2])
+		local dimension, chunkX, chunkZ = string.match(value["Chunk"], "(%d)\: ([d%-])\, ([d%-])")
+		functions.debug(dimension, " ", chunkX, " ", chunkZ)
+		
+--		local chunkTable = functions.explode("\, ", value["Chunk"])
+--		local chunkX = tonumber(chunkTable[1])
+--		local chunkZ = tonumber(chunkTable[2])
 		
 		local realX = chunkX * 16
 		local realZ = chunkZ * 16
