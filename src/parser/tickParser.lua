@@ -155,7 +155,6 @@ function getChunks()
 		row.time = value["Time/Tick"]
 		
 		local dimension, chunkX, chunkZ = string.match(value["Chunk"], "(.*)\:\ (.*)\,\ (.*)")
-		functions.debug(dimension, " ", chunkX, " ", chunkZ)
 		
 		local realX = chunkX * 16
 		local realZ = chunkZ * 16
