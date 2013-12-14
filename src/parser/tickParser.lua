@@ -136,14 +136,15 @@ function getChunks()
 		row.percent = value["%"]
 		row.time = value["Time/Tick"]
 		
-		local dimension, chunkX, chunkZ = string.match(value["Chunk"], "(.*)\:\ (.*)\,\ (.*)")
+		-- local dimension, chunkX, chunkZ = string.match(value["Chunk"], "(.*)\:\ (.*)\,\ (.*)")
+		local chunkX, chunkZ = string.match(value["Chunk"], "(.*)\,\ (.*)")
 		
 		local realX = chunkX * 16
 		local realZ = chunkZ * 16
 		
 		row.positionX = realX
 		row.positionZ = realZ
-		row.dimension = dimension
+		row.dimension = "0"
 		
 		table.insert(returnTable, row)
 	end
