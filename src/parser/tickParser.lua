@@ -103,7 +103,7 @@ end
 -- Returns the dimension name given the server and dimension id
 -- If the dimension id is a known minecraft constant, it does not lookup
 -- the array.
-function getDimensionName(dimensionId)
+local function getDimensionName(dimensionId)
 	if (dimensionId == "1") then
 		return "The End"
 	elseif (dimensionId == "0") then
