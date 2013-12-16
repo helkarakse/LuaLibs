@@ -33,14 +33,13 @@ local colors = colors
 
 -- Dimension names
 local dimArray = {
-	{rrServer = 1, dimensionId = 16, dimensionName = "Public Mining"},
-	{rrServer = 1, dimensionId = 11, dimensionName = "Gold Mining"},
-	{rrServer = 1, dimensionId = 5, dimensionName = "Silver Mining"},
-	{rrServer = 1, dimensionId = 7, dimensionName = "Twilight Forest"},
-	{rrServer = 2, dimensionId = 9, dimensionName = "Public Mining"},
-	{rrServer = 2, dimensionId = 11, dimensionName = "Gold Mining"},
-	{rrServer = 2, dimensionId = 7, dimensionName = "Twilight Forest"},
-	{rrServer = 2, dimensionId = 10, dimensionName = "Silver Mining"}
+	{dimensionId = 0, dimensionName = "Overworld"},
+	{dimensionId = 1, dimensionName = "Nether"},
+	{dimensionId = -1, dimensionName = "The End"},
+	{dimensionId = 4, dimensionName = "Public Mining"},
+	{dimensionId = "", dimensionName = "Twilight Forest"},
+	{dimensionId = 8, dimensionName = "Silver Mining"},
+	{dimensionId = 9, dimensionName = "Gold Mining"},
 }
 
 local hexColor = {
