@@ -100,10 +100,29 @@ function getTps()
 	end
 end
 
+-- Returns the dimension name given the server and dimension id
+-- If the dimension id is a known minecraft constant, it does not lookup
+-- the array.
+function getDimensionName(dimensionId)
+	if (dimensionId == "1") then
+		return "The End"
+	elseif (dimensionId == "0") then
+		return "Overworld"
+	elseif (dimensionId == "-1") then
+		return "Nether"
+	else
+		for key, value in pairs(dimArray) do
+			if (value.dimensionId == tonumber(dimensionId)) then
+				return value.dimensionName
+			end
+		end
+	end
+end
+
 -- SingleEntities
 -- Returns a table containing single entities that cause lag. 
 -- Each row is a table containing the following keys: 
--- percent: percentage of time/tick, time: time/tick, name: name of entity, position: position of entity, dimId: dimension id containing entity, dimension: formatted dimension text
+-- percent: percentage of time/tick, time: time/tick, name: name of entity, position: position of entity, dimension: formatted dimension text
 function getSingleEntities()
 	local returnTable = {}
 	
@@ -112,9 +131,9 @@ function getSingleEntities()
 		row.percent = value["%"]
 		row.time = value["Time/Tick"]
 		
-		local name, posX, posY, posZ, dimension = string.match(value["Single Entity"], "(.*)\ (.*)\,(.*)\,(.*)\:(.*)")
+		local name, posX, posY, posZ, dimensionId = string.match(value["Single Entity"], "(.*)\ (.*)\,(.*)\,(.*)\:(.*)")
 		row.name = name
-		row.dimId = dimension
+		row.dimension = getDimensionName(dimensionId)
 		row.position = posX .. ", " .. posY .. ", " .. posZ
 		
 		table.insert(returnTable, row)
@@ -135,14 +154,14 @@ function getChunks()
 		row.percent = value["%"]
 		row.time = value["Time/Tick"]
 		
-		local dimension, chunkX, chunkZ = string.match(value["Chunk"], "(.*)\:\ (.*)\,\ (.*)")
+		local dimensionId, chunkX, chunkZ = string.match(value["Chunk"], "(.*)\:\ (.*)\,\ (.*)")
 		
 		local realX = chunkX * 16
 		local realZ = chunkZ * 16
 		
 		row.positionX = realX
 		row.positionZ = realZ
-		row.dimension = dimension
+		row.dimension = getDimensionName(dimensionId)
 		
 		table.insert(returnTable, row)
 	end
@@ -249,33 +268,3 @@ function getTpsHexColor(tps)
 	
 	return tpsColor
 end
-
--- Returns the dimension name given the server and dimension id
--- If the dimension id is a known minecraft constant, it does not lookup
--- the array.
-function getDimensionName(server, dimensionId)
-	if (dimensionId == "1") then
-		return "The End"
-	elseif (dimensionId == "0") then
-		return "Overworld"
-	elseif (dimensionId == "-1") then
-		return "Nether"
-	else
-		for key, value in pairs(dimArray) do
-			if (value.rrServer == tonumber(server) and value.dimensionId == tonumber(dimensionId)) then
-				return value.dimensionName
-			end
-		end
-	end
-end
-
--- Resolves the RR server ID against the computer ID
--- Add new computerIds as needed
---function getServerId(inputId)
---	local computerId = tonumber(inputId)
---	if (computerId == 17 or computerId == 26 or computerId == 27) then
---		return 2
---	elseif (computerId == 25 or computerId == 88 or computerId == 78) then
---		return 1
---	end
---end
