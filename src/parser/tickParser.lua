@@ -37,7 +37,7 @@ local dimArray = {
 	{dimensionId = 1, dimensionName = "Nether"},
 	{dimensionId = -1, dimensionName = "The End"},
 	{dimensionId = 4, dimensionName = "Public Mining"},
-	{dimensionId = "", dimensionName = "Twilight Forest"},
+	{dimensionId = 7, dimensionName = "Twilight Forest"},
 	{dimensionId = 8, dimensionName = "Silver Mining"},
 	{dimensionId = 9, dimensionName = "Gold Mining"},
 }
@@ -104,17 +104,9 @@ end
 -- If the dimension id is a known minecraft constant, it does not lookup
 -- the array.
 local function getDimensionName(dimensionId)
-	if (dimensionId == "1") then
-		return "The End"
-	elseif (dimensionId == "0") then
-		return "Overworld"
-	elseif (dimensionId == "-1") then
-		return "Nether"
-	else
-		for key, value in pairs(dimArray) do
-			if (value.dimensionId == tonumber(dimensionId)) then
-				return value.dimensionName
-			end
+	for key, value in pairs(dimArray) do
+		if (value.dimensionId == tonumber(dimensionId)) then
+			return value.dimensionName
 		end
 	end
 end
