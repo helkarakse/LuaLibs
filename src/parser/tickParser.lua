@@ -34,8 +34,8 @@ local colors = colors
 -- Dimension names
 local dimArray = {
 	{dimensionId = 0, dimensionName = "Overworld"},
-	{dimensionId = 1, dimensionName = "Nether"},
-	{dimensionId = -1, dimensionName = "The End"},
+	{dimensionId = -1, dimensionName = "Nether"},
+	{dimensionId = 1, dimensionName = "The End"},
 	{dimensionId = 4, dimensionName = "Public Mining"},
 	{dimensionId = 7, dimensionName = "Twilight Forest"},
 	{dimensionId = 8, dimensionName = "Silver Mining"},
