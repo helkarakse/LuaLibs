@@ -40,6 +40,9 @@ local dimArray = {
 	{dimensionId = 7, dimensionName = "Twilight Forest"},
 	{dimensionId = 8, dimensionName = "Silver Mining"},
 	{dimensionId = 9, dimensionName = "Gold Mining"},
+	{dimensionId = -31, dimensionName = "Secret Cow Level"},
+	{dimensionId = -20, dimensionName = "Promised Lands"},
+	{dimensionId = 100, dimensionName = "Deep Dark"},
 }
 
 local hexColor = {
@@ -109,6 +112,7 @@ local function getDimensionName(dimensionId)
 			return value.dimensionName
 		end
 	end
+	return "Unknown"
 end
 
 -- SingleEntities
