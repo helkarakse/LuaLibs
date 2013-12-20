@@ -1,25 +1,25 @@
 --[[
-	
-	Common Functions Version 1.3 Dev
-	Do not modify, copy or distribute without permission of author
-	Helkarakse 20130614
 
-	Changelog:
-		1.3 - Removed MiscPeripherals related segments - 20131201
-		1.2 - Changed encrypt function to accept multiple arguments - 20130614
+Common Functions Version 1.3 Dev
+Do not modify, copy or distribute without permission of author
+Helkarakse 20130614
+
+Changelog:
+1.3 - Removed MiscPeripherals related segments - 20131201
+1.2 - Changed encrypt function to accept multiple arguments - 20130614
 ]]--
 
 -- String Functions
 function explode(divider, inputString)
-    if (divider == '') then return false end
-    local charPos, array = 0, {}
-    for stringStart, stringEnd in function() return string.find(inputString, divider, charPos, true) end do
-        table.insert(array, string.sub(inputString, charPos,stringStart - 1))
-        charPos = stringEnd + 1
-    end
+	if (divider == '') then return false end
+	local charPos, array = 0, {}
+	for stringStart, stringEnd in function() return string.find(inputString, divider, charPos, true) end do
+		table.insert(array, string.sub(inputString, charPos,stringStart - 1))
+		charPos = stringEnd + 1
+	end
 
-    table.insert(array,string.sub(inputString, charPos))
-    return array
+	table.insert(array,string.sub(inputString, charPos))
+	return array
 end
 
 -- Truncates a string and appends ellipsis to end
@@ -53,12 +53,31 @@ function log(...)
 	logHandle.close()
 end
 
+-- debug level debugging message
 function debug(...)
 	local printResult = ""
 	for i,v in ipairs(arg) do
 		printResult = printResult .. tostring(v) .. "\t"
 	end
 	print("DEBUG> " .. printResult)
+end
+
+-- info level debugging message
+function info(...)
+	local printResult = ""
+	for i,v in ipairs(arg) do
+		printResult = printResult .. tostring(v) .. "\t"
+	end
+	print("INFO> " .. printResult)
+end
+
+-- error level debugging message
+function error(...)
+	local printResult = ""
+	for i,v in ipairs(arg) do
+		printResult = printResult .. tostring(v) .. "\t"
+	end
+	print("ERROR> " .. printResult)
 end
 
 -- Peripherals
@@ -117,7 +136,7 @@ end
 function tablePrint(inputTable, indent, done)
 	done = done or {}
 	indent = indent or 0
-  	if type(inputTable) == "table" then
+	if type(inputTable) == "table" then
 		local stringBuilt = {}
 		for key, value in pairs (inputTable) do
 			table.insert(stringBuilt, string.rep (" ", indent))
@@ -151,9 +170,9 @@ end
 function runFuncFor(func,timeout,tArgs, eventType)
 	local result = nil
 	local co = coroutine.wrap(
-		function() 
-			os.queueEvent('done', func(unpack(tArgs or {}))) 
-		end
+	function()
+		os.queueEvent('done', func(unpack(tArgs or {})))
+	end
 	)
 
 	local event = {}
@@ -162,9 +181,9 @@ function runFuncFor(func,timeout,tArgs, eventType)
 	while true do
 		co(unpack(event))
 		event = { os.pullEvent(eventType or "") }
-		if (event[1] == "timer") then 
+		if (event[1] == "timer") then
 			return nil
-		elseif (event[1] == "done") then 
+		elseif (event[1] == "done") then
 			return event
 		end
 	end
@@ -185,7 +204,7 @@ function switch(table)
 			end
 		end
 	end
-	
+
 	return table
 end
 
@@ -193,14 +212,14 @@ end
 function decToHex(inputDec)
 	local hexString = '0123456789ABCDEF'
 	local outputString = ''
-	
+
 	while inputDec > 0 do
 		local mod = math.fmod(inputDec, 16)
 		outputString = string.sub(hexString, mod+1, mod+1) .. outputString
 		inputDec = math.floor(inputDec / 16)
 	end
-	
-	if (outputString == '') then 
+
+	if (outputString == '') then
 		outputString = '0'
 	end
 	return outputString
