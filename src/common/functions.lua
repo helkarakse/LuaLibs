@@ -39,6 +39,11 @@ function buildString(...)
 	return tempString
 end
 
+-- Make first character uppercase
+function ucFirst(inputString)
+	return (inputString:gsub("^%l", string.upper))
+end
+
 -- Logging
 function log(...)
 	local logHandle = fs.open("log", "a")
@@ -170,9 +175,9 @@ end
 function runFuncFor(func,timeout,tArgs, eventType)
 	local result = nil
 	local co = coroutine.wrap(
-	function()
-		os.queueEvent('done', func(unpack(tArgs or {})))
-	end
+		function()
+			os.queueEvent('done', func(unpack(tArgs or {})))
+		end
 	)
 
 	local event = {}
