@@ -117,13 +117,11 @@ function getSingleEntities()
 	
 	for key, value in pairs(tableSingleEntity) do
 		local row = {}
-		row.percent = value["%"]
-		row.time = value["Time/Tick"]
-		
-		local name, posX, posY, posZ, dimensionId = string.match(value["Single Entity"], "(.*)\ (.*)\,(.*)\,(.*)\:(.*)")
-		row.name = name
-		row.dimension = getDimensionName(dimensionId)
-		row.position = posX .. ", " .. posY .. ", " .. posZ
+		row.percent = value.percentage
+		row.time = value.time
+		row.name = value.name
+		row.dimension = value.dimension
+		row.position = value.position
 		
 		table.insert(returnTable, row)
 	end
@@ -140,17 +138,11 @@ function getChunks()
 	
 	for key, value in pairs(tableChunk) do
 		local row = {}
-		row.percent = value["%"]
-		row.time = value["Time/Tick"]
-		
-		local dimensionId, chunkX, chunkZ = string.match(value["Chunk"], "(.*)\:\ (.*)\,\ (.*)")
-		
-		local realX = chunkX * 16
-		local realZ = chunkZ * 16
-		
-		row.positionX = realX
-		row.positionZ = realZ
-		row.dimension = getDimensionName(dimensionId)
+		row.percent = value.percentage
+		row.time = value.time		
+		row.positionX = tonumber(value.chunkX) * 16
+		row.positionZ = tonumber(value.chunkZ) * 16
+		row.dimension = value.dimension
 		
 		table.insert(returnTable, row)
 	end
@@ -167,9 +159,9 @@ function getEntityByTypes()
 	
 	for key, value in pairs(tableEntityByType) do
 		local row = {}
-		row.percent = value["%"]
-		row.time = value["Time/Tick"]
-		row.type = value["All Entities of Type"]
+		row.percent = value.percentage
+		row.time = value.time
+		row.type = value.name
 		
 		table.insert(returnTable, row)
 	end
@@ -187,9 +179,9 @@ function getAverageCalls()
 	
 	for key, value in pairs(tableAverageCalls) do
 		local row = {}
-		row.time = value["Time/tick"]
-		row.name = value["Average Entity of Type"]
-		row.calls = value["Calls"]
+		row.time = value.time
+		row.name = value.name
+		row.calls = value.calls
 		
 		table.insert(returnTable, row)
 	end
