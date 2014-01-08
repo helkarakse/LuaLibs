@@ -24,7 +24,7 @@ os.loadAPI("json")
 os.loadAPI("functions")
 
 -- Variables
-local stringData, tableData, tableTps, tableSingleEntity, tableChunk, tableEntityByType, tableAverageCalls, tableUpdated
+local stringData, tableData, tableTps, tableSingleEntity, tableChunk, tableEntityByType, tableAverageCalls, stringUpdated
 
 -- References
 local tonumber = tonumber
@@ -57,24 +57,19 @@ function parseData(stringInput)
 		stringData = stringInput
 		tableData = json.decode(stringData)
 		
-		tableTps = tableData[1]
-		tableSingleEntity = tableData[2]
-		tableChunk = tableData[3]
-		tableEntityByType = tableData[4]
-		tableAverageCalls = tableData[5]
-		tableUpdated = tableData[6]
+		tableTps = tableData.tps
+		tableSingleEntity = tableData.single
+		tableChunk = tableData.chunk
+		tableEntityByType = tableData.type
+		tableAverageCalls = tableData.call
+		stringUpdated = tableData.tps.last_update
 		return true
 	end
 end
 
 -- Last Updated
 function getUpdatedDate()
-	local updatedValue = ""
-	for k, v in pairs(tableUpdated) do
-		updatedValue = v
-	end
-	
-	return updatedValue
+	return stringUpdated
 end
 
 -- TPS
