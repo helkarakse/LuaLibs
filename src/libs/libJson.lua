@@ -115,6 +115,7 @@ function parseNumber(str)
 end
 
 function parseString(str)
+	print(str)
 	local i,j = str:find('^".-[^\\]"')
 	local s = str:sub(i + 1,j - 1)
 
