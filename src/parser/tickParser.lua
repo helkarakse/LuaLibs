@@ -60,7 +60,6 @@ function parseData(stringInput)
 		tableData = jsonData.result
 		functions.debug("Json decoded...")
 		stringTps = tableData.tps.tps
-		functions.debug("Tps:", stringTps)
 		functions.debug("Tps assigned")
 		tableSingleEntity = tableData.single
 		functions.debug("Single assigned")
@@ -90,7 +89,8 @@ end
 -- Rounds the tps value to given decimal places and returns it
 -- Fixed, but not accurately rounding the number (using strsub method)
 function getTps()
-	if (tonumber(getExactTps()) > 20) then
+	local tps = getExactTps()
+	if (tonumber(tps) > 20) then
 		return "20.00"
 	else
 		return tostring(tps)
