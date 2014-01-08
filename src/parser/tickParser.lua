@@ -181,7 +181,7 @@ function getAverageCalls()
 		local row = {}
 		row.time = value.time
 		row.name = value.name
-		row.calls = value.calls
+		row.calls = tostring(value.calls)
 		
 		table.insert(returnTable, row)
 	end
