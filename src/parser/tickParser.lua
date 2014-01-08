@@ -24,7 +24,7 @@ os.loadAPI("json")
 os.loadAPI("functions")
 
 -- Variables
-local stringData, tableData, tableTps, tableSingleEntity, tableChunk, tableEntityByType, tableAverageCalls, stringUpdated
+local stringData, tableData, stringTps, tableSingleEntity, tableChunk, tableEntityByType, tableAverageCalls, stringUpdated
 
 -- References
 local tonumber = tonumber
@@ -57,7 +57,7 @@ function parseData(stringInput)
 		stringData = stringInput
 		tableData = json.decode(stringData)
 		
-		tableTps = tableData.tps
+		stringTps = tableData.tps.tps
 		tableSingleEntity = tableData.single
 		tableChunk = tableData.chunk
 		tableEntityByType = tableData.type
@@ -75,12 +75,7 @@ end
 -- TPS
 -- Returns the exact tps value as listed in the profile
 function getExactTps()
-	local tpsValue = ""
-	for k, v in pairs(tableTps) do
-		tpsValue = v
-	end
-	
-	return tpsValue
+	return stringTps
 end
 
 -- Rounds the tps value to given decimal places and returns it
