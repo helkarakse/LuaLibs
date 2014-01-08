@@ -60,6 +60,7 @@ function parseData(stringInput)
 		tableData = jsonData.result
 		functions.debug("Json decoded...")
 		stringTps = tableData.tps.tps
+		functions.debug("Tps:", stringTps)
 		functions.debug("Tps assigned")
 		tableSingleEntity = tableData.single
 		functions.debug("Single assigned")
