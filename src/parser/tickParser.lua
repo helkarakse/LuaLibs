@@ -55,7 +55,7 @@ function parseData(stringInput)
 		return false
 	else
 		stringData = stringInput
-		functions.debug("String data:", stringData)
+		-- functions.debug("String data:", stringData)
 		jsonData = json.decode(stringData)
 		tableData = jsonData.result
 		functions.debug("Json decoded...")
