@@ -56,7 +56,8 @@ function parseData(stringInput)
 	else
 		stringData = stringInput
 		functions.debug("String data:", stringData)
-		tableData = json.decode(stringData)
+		jsonData = json.decode(stringData)
+		tableData = jsonData.result
 		functions.debug("Json decoded...")
 		stringTps = tableData.tps.tps
 		functions.debug("Tps assigned")
