@@ -39,11 +39,6 @@ function buildString(...)
 	return tempString
 end
 
--- Make first character uppercase
-function ucFirst(inputString)
-	return (inputString:gsub("^%l", string.upper))
-end
-
 -- Logging
 function log(...)
 	local logHandle = fs.open("log", "a")

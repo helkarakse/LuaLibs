@@ -24,7 +24,7 @@ os.loadAPI("json")
 os.loadAPI("functions")
 
 -- Variables
-local stringData, tableData, tableTps, tableSingleEntity, tableChunk, tableEntityByType, tableAverageCalls, tableUpdated
+local stringData, tableData, stringTps, tableSingleEntity, tableChunk, tableEntityByType, tableAverageCalls, stringUpdated
 
 -- References
 local tonumber = tonumber
@@ -58,48 +58,45 @@ function parseData(stringInput)
 		return false
 	else
 		stringData = stringInput
-		tableData = json.decode(stringData)
-		
-		tableTps = tableData[1]
-		tableSingleEntity = tableData[2]
-		tableChunk = tableData[3]
-		tableEntityByType = tableData[4]
-		tableAverageCalls = tableData[5]
-		tableUpdated = tableData[6]
+		-- functions.debug("String data:", stringData)
+		jsonData = json.decode(stringData)
+		tableData = jsonData.result
+		functions.debug("Json decoded...")
+		stringTps = tableData.tps.tps
+		functions.debug("Tps assigned")
+		tableSingleEntity = tableData.single
+		functions.debug("Single assigned")
+		tableChunk = tableData.chunk
+		functions.debug("Chunk assigned")
+		tableEntityByType = tableData.type
+		functions.debug("Type assigned")
+		tableAverageCalls = tableData.call
+		functions.debug("Call assigned")
+		stringUpdated = tableData.tps.last_update
+		functions.debug("Last update assigned")
 		return true
 	end
 end
 
 -- Last Updated
 function getUpdatedDate()
-	local updatedValue = ""
-	for k, v in pairs(tableUpdated) do
-		updatedValue = v
-	end
-	
-	return updatedValue
+	return stringUpdated
 end
 
 -- TPS
 -- Returns the exact tps value as listed in the profile
 function getExactTps()
-	local tpsValue = ""
-	for k, v in pairs(tableTps) do
-		tpsValue = v
-	end
-	
-	return tpsValue
+	return stringTps
 end
 
 -- Rounds the tps value to given decimal places and returns it
 -- Fixed, but not accurately rounding the number (using strsub method)
 function getTps()
-	-- return roundTo(getExactTps(), (places or 2))
-	local tps = string.sub(getExactTps(), 1, 5)
+	local tps = getExactTps()
 	if (tonumber(tps) > 20) then
 		return "20.00"
 	else
-		return tps
+		return tostring(tps)
 	end
 end
 
@@ -124,13 +121,11 @@ function getSingleEntities()
 	
 	for key, value in pairs(tableSingleEntity) do
 		local row = {}
-		row.percent = value["%"]
-		row.time = value["Time/Tick"]
-		
-		local name, posX, posY, posZ, dimensionId = string.match(value["Single Entity"], "(.*)\ (.*)\,(.*)\,(.*)\:(.*)")
-		row.name = name
-		row.dimension = getDimensionName(dimensionId)
-		row.position = posX .. ", " .. posY .. ", " .. posZ
+		row.percent = value.percentage
+		row.time = value.time
+		row.name = value.name
+		row.dimension = value.dimension
+		row.position = value.position
 		
 		table.insert(returnTable, row)
 	end
@@ -147,17 +142,11 @@ function getChunks()
 	
 	for key, value in pairs(tableChunk) do
 		local row = {}
-		row.percent = value["%"]
-		row.time = value["Time/Tick"]
-		
-		local dimensionId, chunkX, chunkZ = string.match(value["Chunk"], "(.*)\:\ (.*)\,\ (.*)")
-		
-		local realX = chunkX * 16
-		local realZ = chunkZ * 16
-		
-		row.positionX = realX
-		row.positionZ = realZ
-		row.dimension = getDimensionName(dimensionId)
+		row.percent = value.percentage
+		row.time = value.time		
+		row.positionX = tonumber(value.chunkX) * 16
+		row.positionZ = tonumber(value.chunkZ) * 16
+		row.dimension = value.dimension
 		
 		table.insert(returnTable, row)
 	end
@@ -174,9 +163,9 @@ function getEntityByTypes()
 	
 	for key, value in pairs(tableEntityByType) do
 		local row = {}
-		row.percent = value["%"]
-		row.time = value["Time/Tick"]
-		row.type = value["All Entities of Type"]
+		row.percent = value.percentage
+		row.time = value.time
+		row.type = value.name
 		
 		table.insert(returnTable, row)
 	end
@@ -194,9 +183,9 @@ function getAverageCalls()
 	
 	for key, value in pairs(tableAverageCalls) do
 		local row = {}
-		row.time = value["Time/tick"]
-		row.name = value["Average Entity of Type"]
-		row.calls = value["Calls"]
+		row.time = value.time
+		row.name = value.name
+		row.calls = tostring(value.calls)
 		
 		table.insert(returnTable, row)
 	end
