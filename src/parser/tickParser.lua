@@ -56,13 +56,19 @@ function parseData(stringInput)
 	else
 		stringData = stringInput
 		tableData = json.decode(stringData)
-		
+		functions.debug("Json decoded...")
 		stringTps = tableData.tps.tps
+		functions.debug("Tps assigned")
 		tableSingleEntity = tableData.single
+		functions.debug("Single assigned")
 		tableChunk = tableData.chunk
+		functions.debug("Chunk assigned")
 		tableEntityByType = tableData.type
+		functions.debug("Type assigned")
 		tableAverageCalls = tableData.call
+		functions.debug("Call assigned")
 		stringUpdated = tableData.tps.last_update
+		functions.debug("Last update assigned")
 		return true
 	end
 end
