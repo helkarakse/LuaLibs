@@ -93,10 +93,14 @@ end
 -- Fixed, but not accurately rounding the number (using strsub method)
 function getTps()
 	local tps = getExactTps()
-	if (tonumber(tps) > 20) then
-		return "20.00"
+	if (tonumber(tps) ~= nil) then
+		if (tonumber(tps) > 20)then
+			return "20.00"
+		else
+			return tostring(tps)
+		end
 	else
-		return tostring(tps)
+		return "Unknown"
 	end
 end
 
