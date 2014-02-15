@@ -40,6 +40,9 @@ local dimArray = {
 	{dimensionId = 7, dimensionName = "Twilight Forest"},
 	{dimensionId = 8, dimensionName = "Silver Mining"},
 	{dimensionId = 9, dimensionName = "Gold Mining"},
+	{dimensionId = -31, dimensionName = "Secret Cow Level"},
+	{dimensionId = -20, dimensionName = "Promised Lands"},
+	{dimensionId = 100, dimensionName = "Deep Dark"},
 }
 
 local hexColor = {
@@ -58,19 +61,19 @@ function parseData(stringInput)
 		-- functions.debug("String data:", stringData)
 		jsonData = json.decode(stringData)
 		tableData = jsonData.result
-		functions.debug("Json decoded...")
+--		functions.debug("Json decoded...")
 		stringTps = tableData.tps.tps
-		functions.debug("Tps assigned")
+--		functions.debug("Tps assigned")
 		tableSingleEntity = tableData.single
-		functions.debug("Single assigned")
+--		functions.debug("Single assigned")
 		tableChunk = tableData.chunk
-		functions.debug("Chunk assigned")
+--		functions.debug("Chunk assigned")
 		tableEntityByType = tableData.type
-		functions.debug("Type assigned")
+--		functions.debug("Type assigned")
 		tableAverageCalls = tableData.call
-		functions.debug("Call assigned")
+--		functions.debug("Call assigned")
 		stringUpdated = tableData.tps.last_update
-		functions.debug("Last update assigned")
+--		functions.debug("Last update assigned")
 		return true
 	end
 end
@@ -90,10 +93,14 @@ end
 -- Fixed, but not accurately rounding the number (using strsub method)
 function getTps()
 	local tps = getExactTps()
-	if (tonumber(tps) > 20) then
-		return "20.00"
+	if (tonumber(tps) ~= nil) then
+		if (tonumber(tps) > 20)then
+			return "20.00"
+		else
+			return tostring(tps)
+		end
 	else
-		return tostring(tps)
+		return "Unknown"
 	end
 end
 
@@ -106,6 +113,7 @@ local function getDimensionName(dimensionId)
 			return value.dimensionName
 		end
 	end
+	return "Unknown"
 end
 
 -- SingleEntities
@@ -117,8 +125,8 @@ function getSingleEntities()
 	
 	for key, value in pairs(tableSingleEntity) do
 		local row = {}
-		row.percent = value.percentage
-		row.time = value.time
+		row.percent = tostring(value.percentage)
+		row.time = tostring(value.time)
 		row.name = value.name
 		row.dimension = value.dimension
 		row.position = value.position
@@ -138,8 +146,8 @@ function getChunks()
 	
 	for key, value in pairs(tableChunk) do
 		local row = {}
-		row.percent = value.percentage
-		row.time = value.time		
+		row.percent = tostring(value.percentage)
+		row.time = tostring(value.time)
 		row.positionX = tonumber(value.chunkX) * 16
 		row.positionZ = tonumber(value.chunkZ) * 16
 		row.dimension = value.dimension
@@ -159,8 +167,8 @@ function getEntityByTypes()
 	
 	for key, value in pairs(tableEntityByType) do
 		local row = {}
-		row.percent = value.percentage
-		row.time = value.time
+		row.percent = tostring(value.percentage)
+		row.time = tostring(value.time)
 		row.type = value.name
 		
 		table.insert(returnTable, row)
@@ -179,7 +187,7 @@ function getAverageCalls()
 	
 	for key, value in pairs(tableAverageCalls) do
 		local row = {}
-		row.time = value.time
+		row.time = tostring(value.time)
 		row.name = value.name
 		row.calls = tostring(value.calls)
 		

@@ -170,9 +170,9 @@ end
 function runFuncFor(func,timeout,tArgs, eventType)
 	local result = nil
 	local co = coroutine.wrap(
-	function()
-		os.queueEvent('done', func(unpack(tArgs or {})))
-	end
+		function()
+			os.queueEvent('done', func(unpack(tArgs or {})))
+		end
 	)
 
 	local event = {}
