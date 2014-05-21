@@ -123,15 +123,17 @@ end
 function getSingleEntities()
 	local returnTable = {}
 	
-	for key, value in pairs(tableSingleEntity) do
-		local row = {}
-		row.percent = tostring(value.percentage)
-		row.time = tostring(value.time)
-		row.name = value.name
-		row.dimension = value.dimension
-		row.position = value.position
-		
-		table.insert(returnTable, row)
+	if (type(tableSingleEntity) == "table") then
+		for key, value in pairs(tableSingleEntity) do
+			local row = {}
+			row.percent = tostring(value.percentage)
+			row.time = tostring(value.time)
+			row.name = value.name
+			row.dimension = value.dimension
+			row.position = value.position
+			
+			table.insert(returnTable, row)
+		end
 	end
 	
 	return returnTable
@@ -144,6 +146,7 @@ end
 function getChunks()
 	local returnTable = {}
 	
+	if (type(tableChunk) == "table") then
 	for key, value in pairs(tableChunk) do
 		local row = {}
 		row.percent = tostring(value.percentage)
@@ -153,6 +156,7 @@ function getChunks()
 		row.dimension = value.dimension
 		
 		table.insert(returnTable, row)
+	end
 	end
 	
 	return returnTable
@@ -165,6 +169,7 @@ end
 function getEntityByTypes()
 	local returnTable = {}
 	
+	if (type(tableEntityByType) == "table") then
 	for key, value in pairs(tableEntityByType) do
 		local row = {}
 		row.percent = tostring(value.percentage)
@@ -172,6 +177,7 @@ function getEntityByTypes()
 		row.type = value.name
 		
 		table.insert(returnTable, row)
+	end
 	end
 	
 	return returnTable
@@ -185,6 +191,7 @@ end
 function getAverageCalls()
 	local returnTable = {}
 	
+	if (type(tableAverageCalls) == "table") then
 	for key, value in pairs(tableAverageCalls) do
 		local row = {}
 		row.time = tostring(value.time)
@@ -192,6 +199,7 @@ function getAverageCalls()
 		row.calls = tostring(value.calls)
 		
 		table.insert(returnTable, row)
+	end
 	end
 	
 	return returnTable
